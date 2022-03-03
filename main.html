@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+    
+        <link rel="stylesheet" href="https://sandhyauddaraju.github.io/style.css">
+     <style type="text/css">
+        circle:hover {
+            fill: rgb(134, 133, 131);
+          }
+        </style>
+        <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+       <!--<script src="http://localhost:8080/js/main.js"></script>--> 
+        <!-- Custom JS -->
+	    <script src="https://sandhyauddaraju.github.io/streetmap.js"></script>
+        <script src="https://sandhyauddaraju.github.io/timlineChart.js"></script>
+        <script src="https://sandhyauddaraju.github.io/distribution.js"></script>
+        <script src="https://sandhyauddaraju.github.io/distributionPie.js"></script>
+        <!--<script src="http://localhost:8080/js/mouseevents.js"></script>-->
+
+    </head>
+    <body>
+      <h3 style="color:purple; text-align: center;"><i>Dr John Snow Cholera Epdemic Map Recreation</i></h1>
+        <br>
+        <a href="http://localhost:8080/html/documentation.html">Project Documentation</a> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="">Video</a>
+
+     <!--  <div class="container">--> 
+           <br/> <br/> <br/>
+           <div id="tooltip" class="hidden">			
+            <p><span id="value">100</span></p>
+          </div> 
+           <table>
+             <tr>
+               <td>
+                <div id="chart-area" class="container1">
+
+                  <input name="updateBtnGender" class="button"
+                  type="button" 
+                  value="Locate Deaths By Gender" id="updateBtnGender" />
+          
+                  <input name="updateBtnAge" class="button"
+                  type="button" 
+                  value="Locate Deaths By Age" id="updateBtnAge"/>
+
+                  <input name="ResetBtnAge" class="button"
+                  type="button" 
+                  value="Reset Location Of Deaths" id="resetBtnAge"/>
+                 
+              </div>
+
+               </td>
+               
+
+               <td>
+                <div id="chart-area1" class="container2">
+                  
+                </div>
+               </td>
+             </tr>
+             <tr>
+               <td style="text-align: center;">
+                
+                <div id="chart-area2" class="container2"> </div>
+            </td>
+               <td>
+                <div id="chart-area3" class="container1">
+
+                </div>
+               </td>
+             </tr>
+           </table>
+         <!--   <div id="chart-area" class="container1">
+
+                    <input name="updateBtnGender" class="button"
+                    type="button" 
+                    value="Locate Deaths By Gender" id="updateBtnGender"/>
+            
+                    <input name="updateBtnAge" class="button"
+                    type="button" 
+                    value="Locate Deaths By Age" id="updateBtnAge"/>
+
+                   
+                </div> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <div id="chart-area2" class="container2">
+                  
+                </div>--> 
+
+
+
+          <!--      <div id="outer">
+                  <div class="div" id="chart-area"> 
+                    <input name="updateBtnGender" class="button"
+                    type="button" 
+                    value="Locate Deaths By Gender" id="updateBtnGender"/>
+            
+                    <input name="updateBtnAge" class="button"
+                    type="button" 
+                    value="Locate Deaths By Age" id="updateBtnAge"/>
+                  </div>
+                  <div class="div" id="chart-area2"></div>
+                 
+                  <div class="div" id="chart-area3"></div>
+                  <div class="div" id="chart-area4"></div>
+                
+                  </div>-->
+                  
+                <!--<div id="chart-area3" class="container3">
+
+                </div>-->
+           
+     <!--    </div>--> 
+      <!--  <input name="updateButtonAge" 
+        type="button" 
+        value="Deaths By Age" 
+        onclick="updateData()" />-->
+
+       
+
+       
+     
+        
+    </body>
+</html>
