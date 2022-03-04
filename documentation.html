@@ -2,8 +2,55 @@
     <head>
 <title>design document</title>
     </head>
-    <body>
-<a href="https://sandhyauddaraju.github.io/main.html">Back</a>
+<body style="margin-top: 50; margin-bottom: 50;margin-left: 50;margin-right: 50;">
+<a href="http://localhost:8080/html/main.html">Back To Visualization</a>
+<br>
+<h2 style="text-align:center">Design Document - Recreation of Dr. John Snow Cholera Epidemic Map</h2> <br>
+The goal of this project is to recreate Dr. John Snow’s cholera epidemic map ( London's 1854 cholera epidemic , the visualization created by Dr. John Snow was able to identify the source of the cholera epidemic outbreak) 
+in an interactive way using d3, html, javascript and css.
+<br>
+<br>
+<b><u>Design process</u></b><br><br>
+Firstly, I came up with two sketches i.e. map and timeline chart. <br>
+<img src="http://localhost:8080/sketch1.JPG" height="200" width="400"></img><br>
+By using the timeline chart in the visualization, I was able to identify the count of deaths based on gender and age group. Based on the information identified additional sketches are drawn as below.<br>
+<img src="http://localhost:8080/sketch2.JPG" height="200" width="400"></img> <br><br>
+<b><u>Design Choices</u></b> <br><br>
+
+   1. The color encoding for age groups ( 0-10,  11-20,  21-40,  41-60, 61-80,  > 80) and gender(Male, Female) are selected keeping in mind colour blindness scenario. Legend is dynamic which changes based on the button selection [6].<br>
+   2. Coming to the arrangements of the components of the visualization, the map and the timeline chart are two important components of the visualization, as both allow user to interact, so they are arranged on the top. <br>
+   3. The default color encoding is based on age groups, the two buttons located on the top left gives the user the option to locate the location of deaths on the map based on age group and gender.<br>
+   4. The timeline chart gives the death count per date and on hover of each data point the user would be able to view the location of deaths on maps based on age group [5].<br>
+   5. To view the percentages of total counts based on gender, age group; pie chart is used. The Pie chart is dynamic it changes the color and percentages based on button selection on top (i.e.  age group, gender). It's the reason for it’s placement just below the map.<br>
+   6. Grouped bar chart [1] is provided to get an overall view of the death counts in each of the age groups and gender. In a single view, user will be able to observe the number of deaths in each of the age groups, along with gender counts.<br>
+   7. Tool tips are provided for map, timeline chart, pie chart, grouped bar chart to give additional information to the user [4].<br>
+   8. Zoom in/out functionality is added to the map to view the death location on maps more clearly [2] [3]. <br> <br>
+
+<b><u>Facts </u></b><br><br>
+Several questions are answered by the visualization:<br><br>
+    1.From the map the location of the contaminated pump can be identified is near the BROAD STREET, that’s where there are the greatest number of deaths as per death locations.<br>
+    2.From the timeline we get the information about deaths by date, the greatest number of deaths is on 1-Sep.<br>
+    3.By looking at the grouped bar chart, we get counts based on age group and the counts of gender in age group. The most affected age groups are 0-10 (death count: 143 ) and > 80 (death count: 174) and both the genders (male – 284, female - 287) are almost equally affected.<br>
+    4.Pie chart gives the over all percentages based on age groups [0-10 – (25.4%), >80 – (30.47%)] and gender (male-49.74%, female-50.26%).<br><br>
+
+<b><u>Final Visualizations</u></b><br> <br>
+Default view based on age group. <br><br>
+<img src="http://localhost:8080/result1.JPG" height="300" width="700"></img> <br>
+<img src="http://localhost:8080/result2.JPG" height="300" width="700"></img> <br><br>
+When user clicks on button "Locate Deaths By Gender" <br> <br>
+<img src="http://localhost:8080/result4.JPG" height="500" width="700"></img> <br>
+
+ 
+Screen shot of legend using color blindness mode<br><br>
+<img src="http://localhost:8080/result3.JPG" height="100" width="400"></img><br><br>
+
+<b><u>References</u></b> <br> <br>
+1)	https://embed.plnkr.co/plunk/rpRXFq <br>
+2)	https://www.d3indepth.com/zoom-and-pan/ <br>
+3)	https://mtaptich.github.io/d3-lessons/d3-maps-live-code-2/<br>
+4)	https://codepen.io/billdwhite/pen/OJLeLR<br>
+5)	http://bl.ocks.org/phoebebright/3059392<br>
+6)	https://www.d3-graph-gallery.com/graph/custom_legend.html
 
 
     </body>
