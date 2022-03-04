@@ -214,7 +214,7 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
                                     r: 2
                                 });
                                 d3.select("#tooltip").classed("hidden", true); 
-                               // updateMap(deathLocationCoordinatesTimeLine);
+                                updateMap(deathLocationCoordinatesTimeLine);
                                // d3.selectAll('#pieChart')
                                // .remove();
                                // updatePieChart(false,null);  
