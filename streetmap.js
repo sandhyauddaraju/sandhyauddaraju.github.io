@@ -81,11 +81,11 @@ for(var i=0; i< deathlocationcsv.length;i++)
 
 
 var xsclmap = d3.scale.linear()
-    .domain([d3.min(mapCoordinates, function(d) {return d.x;}), d3.max(mapCoordinates, function(d) {return d.x;})]) //use just the x part
+    .domain([d3.min(json, function(d) {return d.x;}), d3.max(json, function(d) {return d.x;})]) //use just the x part
     .range([margin.left, width + margin.left])
 
 var ysclmap = d3.scale.linear()
-    .domain([d3.min(mapCoordinates, function(d) {return d.y;}), d3.max(mapCoordinates, function(d) {return d.y;})]) // use just the y part
+    .domain([d3.min(json, function(d) {return d.y;}), d3.max(json, function(d) {return d.y;})]) // use just the y part
     .range([height + margin.top, margin.top]) 
 
 //var xAxis = d3.svg.axis.scale(xsclmap).orient("bottom")
@@ -173,7 +173,7 @@ createLegend = function(deathLocationCoordinates, mapCategory, mapColor,id){
                 else{
                     margin.top +15; 
                 }
-              })
+              })// 100 is where the first dot appears. 25 is the distance between dots
               .attr("r", 7)
               .style("fill", function(d){ 
               
@@ -210,7 +210,7 @@ var svg = d3.select("body")
 var svgContainer = d3.select("#svgMap");   
     const g = svg.append("g")
     .attr("id","mapGrp")
-    .attr("transform",`translate(${0},${margin.top})`)
+    //.attr("transform",`translate(${0},${margin.top})`)
     
     //.call(d3.behavior.zoom().on("zoom", function () {
     //    svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
@@ -228,14 +228,14 @@ svgContainer.call(zoom);
 
 var lineSegment = d3.svg.line()
 .x(function(d,i) {  return  d.x * 20; }) //console.log(d.x);return  d.x * 25;}
-.y(function(d,i) { return d.y * 20; } ) //console.log(d.y);
+.y(function(d,i) { return height - d.y * 20; } ) //console.log(d.y);
 .interpolate("linear");
 
 map = g
 .append("g")
 .attr("id","mapId")
 .selectAll("line")
-    .data(mapCoordinates)
+    .data(json)
     .enter()
     .append("path")
     .attr("class", "line") 
@@ -259,27 +259,82 @@ map = g
 
 svg.select("#mapId")
 .append("text")
-.attr("x", 1)
-.attr("y", 330)
+.attr("x", 120)
+.attr("y", 280)
 .attr("text-anchor", "middle")  
 .style("font-size", "7px") 
 .text("BROAD STREET")
-.attr("transform", "rotate(-45)");
+.attr("transform", "rotate(-30)");
 //.attr("tranform",'translate(10,80)rotate(-35 * 90)');  
 
 svg.select("#mapId")
 //.selectAll("text")
 .append("text")
-.attr("x", 200)
-.attr("y", 350)
+.attr("x", 230)
+.attr("y", 80)
 .attr("text-anchor", "middle")  
 .style("font-size", "7px") 
 .text("OXFORD STREET")
 .attr("transform","rotate(0)")
+
+svg.select("#mapId")
+//.selectAll("text")
+.append("text")
+.attr("x", 250)
+.attr("y", 320)
+.attr("text-anchor", "middle")  
+.style("font-size", "7px") 
+.text("RECENTS QUADRANT")
+.attr("transform","rotate(0)")
+
+svg.select("#mapId")
+//.selectAll("text")
+.append("text")
+.attr("x", -300)
+.attr("y", 40)
+.attr("text-anchor", "middle")  
+.style("font-size", "7px") 
+.text("RECENT STREET")
+.attr("transform","rotate(-120)")
+
+svg.select("#mapId")
+//.selectAll("text")
+.append("text")
+.attr("x", 50)
+.attr("y", 390)
+.attr("text-anchor", "middle")  
+.style("font-size", "7px") 
+.text("BREWER STREET")
+.attr("transform","rotate(-40)")
 //.attr("transform",'translate(10,80)rotate(-35)')
 //.attr("transform", "rotate(45)") //.attr('transform', 'rotate(45 ' + xValue + ' ' + yValue + ')')
 //.attr("transform", "rotate("+ 90*360 +")");
 //.attr("tranform","rotate(45 -10 10)");  
+
+rectGrp = svg.select("#mapId")
+.append("g")
+.append("rect")
+.attr("width", 15)
+.attr("height", 10)
+.attr("x",210)
+.attr("y",150)
+.attr("fill", function(d){
+             return colorScaleAge("Work House");
+            });
+
+
+rectGrp = svg.select("#mapId")
+            .append("g")
+            .append("rect")
+            .attr("width", 10)
+            .attr("height", 7)
+            .attr("x",273)
+            .attr("y",178)
+            .attr("fill", function(d){
+                         return colorScaleAge("Brewery");
+                        })
+            .attr("transform","rotate(0)");
+
 
 svg.select("#mapId")
 .selectAll("circle")
@@ -288,30 +343,33 @@ svg.select("#mapId")
     .append("circle")  
     .attr("r", 3)
     .attr("cx", function(d){ return (d[0] * 20)}) //console.log(d.x); 
-    .attr("cy", function(d){ return (d[1] * 20)}) //console.log(d.y);
+    .attr("cy", function(d){ return height -(d[1] * 20)}) //console.log(d.y);
     .attr("fill", function(d){
      return colorScaleAge("Pump");
     });
 
 
-svg.select("#mapId")      
-        .append("circle")  
-        .attr("r", 3)
-        .attr("cx", function(d){ return 200;}) //console.log(d.x); 
-        .attr("cy", function(d){ return 180;}) //console.log(d.y);
-        .attr("fill", function(d){
-         return colorScaleAge("Work House");
-        });   
 
-svg.select("#mapId")      
-        .append("circle")  
-        .attr("r", 3)
-        .attr("cx", function(d){ return 280;}) //console.log(d.x); 
-        .attr("cy", function(d){ return 201;}) //console.log(d.y);
-        .attr("fill", function(d){
-         return colorScaleAge("Brewery");
-        });   
 
+//
+//svg.select("#mapId")      
+//        .append("circle")  
+//        .attr("r", 3)
+//        .attr("cx", function(d){ return 200;}) //console.log(d.x); 
+//        .attr("cy", function(d){ return height - 180;}) //console.log(d.y);
+//        .attr("fill", function(d){
+//         return colorScaleAge("Work House");
+//        });   
+//
+//svg.select("#mapId")      
+//        .append("circle")  
+//        .attr("r", 3)
+//        .attr("cx", function(d){ return 280;}) //console.log(d.x); 
+//        .attr("cy", function(d){ return height - 201;}) //console.log(d.y);
+//        .attr("fill", function(d){
+//         return colorScaleAge("Brewery");
+//        });   
+//
 var ageGrpCircles =svg.select("#mapId").append("g")
 .attr("id","ageGroup")
 .selectAll("circle")
@@ -320,7 +378,7 @@ var ageGrpCircles =svg.select("#mapId").append("g")
 .append("circle")
 .attr("r", 1.5)
 .attr("cx", function(d){ return (d[0] * 20)}) //console.log(d.x); 
-.attr("cy", function(d){  return (d[1]* 20)}) //console.log(d.y);
+.attr("cy", function(d){  return height - (d[1]* 20)}) //console.log(d.y);
 .style("fill", function(d)
  { 
     //var mapAgeCategory = ["Age:0-10","Age:11-20","Age:21-40","Age:41-60","Age:61-80","Age:> 80"];
@@ -353,8 +411,10 @@ var ageGrpCircles =svg.select("#mapId").append("g")
     d3.select(this).attr({            
         r: 1.5 * 2
     });
-    toolTipOnMouseOver(d);   
-    d3.select("#tooltip").classed("hidden", false); 
+    toolTipOnMouseOver(d);
+   // toolTipOnMouseOverTest(d);
+  // 
+    d3.select("#tooltip").classed("hidden", false);
 })
 .on("mouseout", function() {
     d3.select(this).attr({            
@@ -381,7 +441,7 @@ d3.select("#updateBtnGender").on("click", function(){
     .append("circle")
     .attr("r", 1.5)
     .attr("cx", function(d){ return (d[0] * 20)}) //console.log(d.x); 
-    .attr("cy", function(d){  return (d[1]* 20)}) //console.log(d.y);
+    .attr("cy", function(d){  return height - (d[1]* 20)}) //console.log(d.y);
     .style("fill", function(d)
      {
          //mapGenderCategory
@@ -433,7 +493,7 @@ d3.select("#updateBtnAge").on("click", function(){
     .append("circle")
     .attr("r", 1.5)
     .attr("cx", function(d){ return (d[0] * 20)}) //console.log(d.x); 
-    .attr("cy", function(d){  return (d[1]* 20)}) //console.log(d.y);
+    .attr("cy", function(d){  return height - (d[1]* 20)}) //console.log(d.y);
     .style("fill", function(d)
      {
         //var mapAgeCategory = ["Pump","Age:0-10","Age:11-20","Age:21-40","Age:41-60","Age:61-80","Age:> 80"];
@@ -506,7 +566,7 @@ d3.select("#resetBtnAge").on("click", function(){
     .append("circle")
     .attr("r", 1.5)
     .attr("cx", function(d){ return (d[0] * 20)}) //console.log(d.x); 
-    .attr("cy", function(d){  return (d[1]* 20)}) //console.log(d.y);
+    .attr("cy", function(d){  return height - (d[1]* 20)}) //console.log(d.y);
     .style("fill", function(d)
      {
         //var mapAgeCategory = ["Pump","Age:0-10","Age:11-20","Age:21-40","Age:41-60","Age:61-80","Age:> 80"];
@@ -568,13 +628,14 @@ d3.select("#resetBtnAge").on("click", function(){
 })
 
 
+
 var toolTipOnMouseOver = function(d) {
 
     var xPosition = xsclDeathLocation(d[0] ) ;
     var yPosition = ysclDeathLocation(d[1] ) ;
     var age;
     var gender;
-    //console.log(d[3]);    
+    console.log("toolTipOnMouseOver - "+d[3]);    
         if(d[3] == 0)
         {
             gender = "Male";
@@ -605,17 +666,25 @@ var toolTipOnMouseOver = function(d) {
             default:
                 break;
         }
+
+        console.log("Age:"+ age + "\n" + "Gender:"+gender);
+    
     d3.select("#tooltip")
     .style("postion",  "absolute")
     .style("left", Math.max(0, d3.event.pageX - 150) + "px") 
-    .style("top",  (d3.event.pageY + 20) + "px")//	yPosition
+    .style("top",  (d3.event.pageY + 20) + "px")//	yPosition	
     //.style("left", xPosition + "px") 
     //.style("top",  yPosition + "px")//	yPosition					
     .select("#value")
-    .text(function(d){        
+    .text(function(d){    
+        console.log(d);   
         var tooltipText = "Age:"+ age + "\n" + "Gender:"+gender;
+        console.log(tooltipText);
         return tooltipText;
 
-})};
+})
+d3.select("#tooltip").classed("hidden", false);
+
+};
   
 })})});
