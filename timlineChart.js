@@ -214,7 +214,7 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
                            .attr("cy", function(d) {
                                    return yScale(d.deaths);
                            })
-                           .attr("r", 2)
+                           .attr("r", 1.5)
                            .style("fill", "black")
                            //.append("title")
                            //. text(function(d){    
@@ -264,10 +264,10 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
                             .on("mouseout", function() {
                                 d3.select(this).attr({
                                     fill: "black",
-                                    r: 2
+                                    r: 1.5
                                 });
                                 d3.select("#tooltip").classed("hidden", true); 
-                               // updateMap(deathLocationCoordinatesTimeLine);
+                                updateMap(deathLocationCoordinatesTimeLine);
                                // d3.selectAll('#pieChart')
                                // .remove();
                                // updatePieChart(false,null);  
@@ -369,7 +369,7 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
         .data(deathLocations)
         .enter()
         .append("circle")
-        .attr("r", 2)
+        .attr("r", 1.5)
         .attr("cx", function(d){ return (d[0] * 20)}) //console.log(d.x); 
         .attr("cy", function(d){  return height - (d[1]* 20)}) //console.log(d.y);
         .style("fill", function(d)
