@@ -108,7 +108,7 @@ var margin = {top: 40, right: 40, bottom: 40, left: 40},
                     }
                 }
         }
-        console.log(dataSet);
+    //    console.log(dataSet);
         return dataSet;       
     }
 
@@ -231,7 +231,7 @@ var margin = {top: 40, right: 40, bottom: 40, left: 40},
            
            var ageGrp1 = new AgeMaleFemale("0-10",countM0,countF0);
            GroupedInfo.push(ageGrp1);
-           console.log(ageGrp1);
+         //  console.log(ageGrp1);
        }
        if(countM1 != 0 || countF1 != 0 )
        {
@@ -275,7 +275,7 @@ var margin = {top: 40, right: 40, bottom: 40, left: 40},
             var groupInfoPie =  getGroupedInfoForPie(deathCoordinatesInPie);
             totalCount = GetTotalCountOfDeaths(); 
             
-            console.log(totalCount);
+          //  console.log(totalCount);
             
             //console.log(NumberOfDeathsByDate);
             //console.log(groupInfo); 
