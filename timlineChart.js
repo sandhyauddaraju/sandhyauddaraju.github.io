@@ -28,10 +28,24 @@ var rowConverterLocation = function(d){
             gender: parseInt(d.gender)
         };
     }
+
+var dateConvert = function(data){
+    console.log(data);
+    console.log(new Date(data).getDate());
+var dd = String(new Date(data).getDate()).padStart(2, '0');
+var mm = String(new Date(data).getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = new Date(data).getFullYear();
+
+today = mm + '-' + dd + '-' + 1900 +' 00:00:00 GMT-0500 (Eastern Daylight Time)';
+return today;
+}
     
 //var NumberOfDeathsByDate = [];
 var deathLocationCoordinatesTimeLine = [];
 var NumberOfDeathsByDate, xScale, yScale; 
+
+
+
 
 d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, function(deathDays){
     d3.csv("https://sandhyauddaraju.github.io/deaths_age_sex.csv", rowConverterLocation, function(deathlocationcsv){
@@ -43,8 +57,47 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
         }
        // console.log(deathLocationCoordinates);
 
-        var startDate = d3.min(NumberOfDeathsByDate, function(d) { return d.date; });
-        var endDate = d3.max(NumberOfDeathsByDate, function(d) { return d.date; });
+
+/////////////////
+ //      var startDateTemp = d3.select("#startdatemin").property("value");
+ //      stdt = new Date(startDateTemp).toDateString();      
+ //      utc = new Date(stdt).toUTCString() 
+ //      tmp =     dateConvert(utc);
+ //         var startDate = new Date(tmp) //.toUTCString();
+ //    console.log(startDate)
+ //         var endDateTmp = d3.select("#enddatemax").property("value");
+ //    stdtend = new Date(endDateTmp).toDateString();      
+ //    utcend = new Date(stdtend).toUTCString()
+ //    tmp =     dateConvert(utcend);
+ //    var endDate = new Date(tmp)//.toUTCString();
+ //        console.log(endDate)
+
+////////////////////
+      //console.log(endDate1);
+       //d3.time.format("%b %d")
+       
+   //    stdt = new Date(startDate).toDateString();
+   //    console.log(stdt);
+   //    utc = new Date(stdt).toUTCString()
+   //    console.log(utc);
+   //    var dd =  String(new Date(utc).getDate()).padStart(2, '0')// utc.getDate(); //String(data.getDate()).padStart(2, '0');
+   //    
+   //    var mm = String(new Date(utc).getMonth() + 1).padStart(2, '0'); //January is 0!//utc.getMonth() //+ 1).padStart(2, '0'); //January is 0!
+   //   // var yyyy = utc.getFullYear();       
+   //    //today = mm + '-' + dd;
+   //    console.log(mm + '-' + dd);
+   //    console.log(new Date(stdt).toUTCString())
+   //    console.log(startDate);
+   //    var endDate = d3.select("#enddatemax").property("value");
+   //    console.log(new Date(endDate).toUTCString());
+
+        var startDate = d3.min(NumberOfDeathsByDate, function(d) {  return d.date; }); //console.log(d.date);
+     // console.log(startDate1);
+       var endDate = d3.max(NumberOfDeathsByDate, function(d) { return d.date; }); //console.log(d.date); 
+      //console.log(endDate1);
+
+      //  console.log( d3.time.day.offset(startDate, -2));
+      //  console.log(d3.time.day.offset(endDate, 2));
 
         xScale = d3.time.scale()
         .domain([
@@ -214,7 +267,7 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
                                     r: 2
                                 });
                                 d3.select("#tooltip").classed("hidden", true); 
-                                updateMap(deathLocationCoordinatesTimeLine);
+                               // updateMap(deathLocationCoordinatesTimeLine);
                                // d3.selectAll('#pieChart')
                                // .remove();
                                // updatePieChart(false,null);  
@@ -318,7 +371,7 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
         .append("circle")
         .attr("r", 2)
         .attr("cx", function(d){ return (d[0] * 20)}) //console.log(d.x); 
-        .attr("cy", function(d){  return (d[1]* 20)}) //console.log(d.y);
+        .attr("cy", function(d){  return height - (d[1]* 20)}) //console.log(d.y);
         .style("fill", function(d)
          {           
             switch(d[2])
@@ -351,7 +404,8 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
             d3.select(this).attr({            
                 r: 1.5 * 2
             });
-            toolTipOnMouseOver(d);
+           // toolTipOnMouseOver(d);
+           toolTipOnMouseOverTimeChart(d);
           // 
             d3.select("#tooltip").classed("hidden", false);
         })
@@ -369,7 +423,7 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
 
     }
 
-    var toolTipOnMouseOver = function(d) {
+    var toolTipOnMouseOverTimeChart = function(d) {
 
       //  var xPosition = xsclDeathLocation(d[0] ) ;
       //  var yPosition = ysclDeathLocation(d[1] ) ;
@@ -413,7 +467,7 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
         //.style("top",  mouseCoordinates[1] + "px")
         .style("postion",  "absolute")
         .style("left", Math.max(0, d3.event.pageX - 150) + "px") 
-        .style("top",  (d3.event.pageY + 20) + "px")//	yPosition
+        .style("top",  (d3.event.pageY + 20) + "px")//	yPosition	
         //.style("left", xPosition + "px") 
         //.style("top",  yPosition + "px")//	yPosition					
        // .select("#value")
@@ -426,4 +480,81 @@ d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, func
 
             
     })};
+
+
+  //  d3.select("#updateGraph").on("click",function()
+  //  {
+//
+  //      NumberOfDeathsByDate = deathDays       
+  //      for(var i=0; i< deathlocationcsv.length;i++)
+  //      {
+  //          deathLocationCoordinatesTimeLine.push([deathlocationcsv[i].x,deathlocationcsv[i].y,deathlocationcsv[i].age,deathlocationcsv[i].gender]);
+  //      }
+  //              
+  //          
+  //      var numberOfDeathsTemp = []; // NumberOfDeathsByDate;
+  //      var deathlocationsTemp = [];//deathLocationCoordinatesTimeLine;
+  //  
+  //              var startDateTemp = d3.select("#startdatemin").property("value");
+  //              stdt = new Date(startDateTemp).toDateString();      
+  //              utc = new Date(stdt).toUTCString() 
+  //              tmp = dateConvert(utc);
+  //              var startDate = new Date(tmp) //.toUTCString();
+  //              console.log(startDate)
+  //              var endDateTmp = d3.select("#enddatemax").property("value");
+  //              stdtend = new Date(endDateTmp).toDateString();      
+  //              utcend = new Date(stdtend).toUTCString()
+  //              tmp =     dateConvert(utcend);
+  //              var endDate = new Date(tmp)//.toUTCString();
+  //              console.log(endDate)
+  //            
+  //            //  NumberOfDeathsByDateTmp = deathDays; 
+  //            //  console.log(NumberOfDeathsByDateTmp);      
+  //              for(var i=0; i< deathlocationcsv.length;i++)
+  //              {
+  //                  deathLocationCoordinatesTimeLine.push([deathlocationcsv[i].x,deathlocationcsv[i].y,deathlocationcsv[i].age,deathlocationcsv[i].gender]);
+  //              }
+  //              var NumberOfDeathsByDate;
+  //              //while(startDate <= endDate)
+  //              //{
+  //                  for(var i=0 ; i<NumberOfDeathsByDate.length; i++)
+  //                  {
+  //                      console.log(startDate);
+  //                      if(startDate <= endDate)
+  //                      {
+  //                          console.log('in condition');
+  //                      if(NumberOfDeathsByDate[i].date == startDate)
+  //                      {
+  //                      numberOfDeathsTemp.push(NumberOfDeathsByDate[i].date, NumberOfDeathsByDate[i].deaths);
+  //                      }
+  //                      startDate = startDate.getDate() + 1;
+  //                      }
+  //                  }
+//
+  //                  console.log(numberOfDeathsTemp);
+  //                 
+  //              //}
+//
+  //              for(var i=0; i<NumberOfDeathsByDateTmp; i++)
+  //              {
+  //  
+  //              }
+  //  
+  //  
+  //        xScale = d3.time.scale()
+  //        .domain([
+  //            d3.time.day.offset(startDate, -2), //startDate, -1 
+  //            d3.time.day.offset(endDate, 2)	 //endDate, 1
+  //        ])
+  //        .range([padding, w - padding]);
+  //  
+  //  
+  //   
+  //  
+  //  });
+
+
 })});
+
+
+
