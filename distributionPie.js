@@ -383,8 +383,8 @@ var margin = {top: 40, right: 40, bottom: 40, left: 40},
 var updatePieChart = function(basedOnGender,updatedDeathCoordinates){
     //console.log("In update function");
     //console.log(updatedDeathCoordinates);
-    d3.csv("http://localhost:8080/deathdays.csv", rowConverterDate, function(deathDays){
-        d3.csv("http://localhost:8080/deaths_age_sex.csv", rowConverterLocation, function(deathlocationcsv){
+    d3.csv("https://sandhyauddaraju.github.io/deathdays.csv", rowConverterDate, function(deathDays){
+        d3.csv("https://sandhyauddaraju.github.io/deaths_age_sex.csv", rowConverterLocation, function(deathlocationcsv){
           
         console.log(updatedDeathCoordinates);
         var updateGroupInfo;
